@@ -15,8 +15,11 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- Interceptor 설정(정의) -->
-	<beans:bean id="boardInterceptor" class="com.spring.sInterceptor.interceptor.BoardInterceptor"/>
-	<beans:bean id="memberInterceptor" class="com.spring.sInterceptor.interceptor.MemberInterceptor"/>
+	<beans:bean id="guestInterceptor" class="com.spring.sInterceptor.interceptor.GuestInterceptor" />
+	<beans:bean id="boardInterceptor" class="com.spring.sInterceptor.interceptor.BoardInterceptor" />
+	<beans:bean id="pdsInterceptor" class="com.spring.sInterceptor.interceptor.PdsInterceptor" />
+	<beans:bean id="memberInterceptor" class="com.spring.sInterceptor.interceptor.MemberInterceptor" />
+	<beans:bean id="etcInterceptor" class="com.spring.sInterceptor.interceptor.EtcInterceptor" />
 	
 	<interceptors>
 		<interceptor>
@@ -27,24 +30,26 @@
 			<mapping path="/board/boardUpdate"/>
 			 -->
 			<mapping path="/board/**"/>
-			<!-- <exclude-mapping path="/board/boardList"/> --> <!-- 예외처리 -->
+			<exclude-mapping path="/board/boardList"/> <!-- 예외처리 -->
 			<beans:ref bean="boardInterceptor" />
 		</interceptor>
 		
-		<!--
-			회원관리 인터셉터 설계
-			모든 사용자가 사용할 수 있는 파일?
-			- login / loginOk / logout / idCheck / nickCheck / join / joinOk
-			
-			memberInterceptor를 통해서 제한적인 처리를 하는 파일?
-			- memberMain / memberUpdate / memberUpdateOk / memberDelete / memberList / memberSearch
-			
-			만들어야 할 jsp 파일?
-			login / idCheck / nickCheck / join / memberMain / memberUpdate
-			memberDelete / memberList / memberSearch
-			
-			메세지 처리파일 경로? logout / joinOk / memberUpdateOk
-		-->
+		<interceptor>
+	    <mapping path="/board/boardList"/>
+	    <beans:ref bean="etcInterceptor" />
+	  </interceptor>
+	  
+	  <interceptor>
+	    <mapping path="/guest/**"/>
+	    <exclude-mapping path="/guest/guestList"/>
+	    <beans:ref bean="guestInterceptor" />
+	  </interceptor>
+	  
+	  <interceptor>
+	    <mapping path="/pds/**"/>
+	    <beans:ref bean="pdsInterceptor" />
+	  </interceptor>
+	  
 		<interceptor>
 			<mapping path="/member/**"/>
 			<exclude-mapping path="/member/login"/>
