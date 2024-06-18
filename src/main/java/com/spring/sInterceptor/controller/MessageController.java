@@ -39,6 +39,18 @@ public class MessageController {
 			model.addAttribute("msg", "회원 등급을 확인하세요.");
 			model.addAttribute("url", "/member/memberMain");
 		}
+		else if(msgFlag.equals("boardDeleteOk")) {
+			model.addAttribute("msg", "게시글을 삭제하였습니다.");
+			model.addAttribute("url", "/member/memberMain");
+		}
+		else if(msgFlag.equals("pdsDeleteOk")) {
+			model.addAttribute("msg", "자료실의 글을 삭제하였습니다.");
+			model.addAttribute("url", "/member/memberMain");
+		}
+		else if(msgFlag.equals("guestDeleteOk")) {
+			model.addAttribute("msg", "방명록의 글을 삭제하였습니다.");
+			model.addAttribute("url", "/member/memberMain");
+		}
 		
 		return "include/message";
 	}

@@ -7,6 +7,15 @@
 	<meta charset="UTF-8">
 	<title>boardList.jsp</title>
 	<jsp:include page="/WEB-INF/views/include/bs4.jsp" />
+	<script>
+    'use strict';
+    
+    function boardDelete() {
+    	let ans = confirm("삭제하시겠습니까?");
+    	if(!ans) return false;
+    	location.href = '${ctp}/board/boardDelete';
+    }
+  </script>
 </head>
 <body>
 <p><br/></p>
@@ -22,7 +31,7 @@
 	<hr/>
 		<a href="${ctp}/board/boardInput" class="btn btn-outline-success">게시판글올리기</a>
 		<a href="${ctp}/board/boardUpdate" class="btn btn-outline-primary">게시판수정하기</a>
-		<a href="${ctp}/board/boardDelete" class="btn btn-outline-info">게시판삭제하기</a>
+    <a href="javascript:boardDelete()" class="btn btn-danger">게시판삭제하기</a>
 	<hr/>
 </div>
 <p><br/></p>
